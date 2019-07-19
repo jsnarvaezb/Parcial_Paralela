@@ -91,7 +91,7 @@ int main(int argc, char const *argv[])
     /* Fixed seed for illustration */
     //srand(3333);
 
-    int n = atoi(argv[1]);
+    n = atoi(argv[1]);
 
 
     int *h_a, *h_b, *h_c;
