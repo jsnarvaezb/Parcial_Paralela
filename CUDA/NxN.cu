@@ -146,7 +146,7 @@ parameters:
 return: none
 *********************************************************************
 */
-void cpu_matrix_mult(int *h_a, int *h_b, int *h_result, int n, int n, int n) {
+void cpu_matrix_mult(int *h_a, int *h_b, int *h_result, int n) {
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < n; ++j)
@@ -231,7 +231,7 @@ int main(int argc, char const *argv[])
     }
     else
     {
-        gpu_matrix_mult<<<dimGrid, dimBlock>>>(d_a, d_b, d_c, n, n, n);
+        gpu_matrix_mult<<<dimGrid, dimBlock>>>(d_a, d_b, d_c, n);
     }
     // Transefr results from device to host
     cudaMemcpy(h_c, d_c, sizeof(int)*n*n, cudaMemcpyDeviceToHost);
