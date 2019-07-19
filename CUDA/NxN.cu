@@ -102,14 +102,14 @@ int main(int argc, char const *argv[])
     // random initialize matrix A
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
-            h_a[i * n + j] = rand() % 1024;
+            h_a[i * n + j] = rand() % 10;
         }
     }
 
     // random initialize matrix B
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
-            h_b[i * n + j] = rand() % 1024;
+            h_b[i * n + j] = rand() % 10;
         }
     }
 
@@ -134,7 +134,7 @@ int main(int argc, char const *argv[])
 
     // Transefr results from device to host
     cudaMemcpy(h_c, d_c, sizeof(int)*n*n, cudaMemcpyDeviceToHost);
-    
+
     // free memory
     cudaFree(d_a);
     cudaFree(d_b);
