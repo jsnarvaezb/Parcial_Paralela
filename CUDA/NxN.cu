@@ -247,7 +247,7 @@ int main(int argc, char const *argv[])
     // start the CPU version
     cudaEventRecord(start, 0);
 
-    cpu_matrix_mult(h_a, h_b, h_cc, n, n, n);
+    cpu_matrix_mult(h_a, h_b, h_cc, n);
 
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
