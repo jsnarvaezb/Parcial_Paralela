@@ -134,9 +134,7 @@ int main(int argc, char const *argv[])
 
     // Transefr results from device to host
     cudaMemcpy(h_c, d_c, sizeof(int)*n*n, cudaMemcpyDeviceToHost);
-    cudaThreadSynchronize();
-
-
+    
     // free memory
     cudaFree(d_a);
     cudaFree(d_b);
