@@ -6,8 +6,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <curand.h>
-#include <curand_kernel.h>
 #include <unistd.h>
 #define TILE_WIDTH 32
 
@@ -71,25 +69,23 @@ void print_matrices(float *A_Matrix, float*B_Matrix, float*ANS_Matrix, int N){
 }
 //to fill matrices with random floats
 void fill_matrices(float *A_Matrix, float *B_Matrix, int N){
-	srand48(time(NULL)); // randomize seed
 	int i;
 	int j;
 
 	for (i = 0; i <  N; i++){
 		for (j = 0; j < N; j++){
-			//drand was suggested by Cho to use for floats
-			float A_input = drand48() * 2.0;
-			*(A_Matrix + i*N + j) = A_input;
+
+			*(A_Matrix + i*N + j) = rand()%10)+1;
 		}
 	}
 	for (i = 0; i <  N; i++){
 		for (j = 0; j < N; j++){
-			//drand was suggested by Cho to use for floats
-			float B_input =  drand48() * 2.0;
-			*(B_Matrix + i*N + j) = B_input;
+
+			*(B_Matrix + i*N + j) = rand()%10)+1;
 		}
 	}
 }
+
 void output_file(float* ANS_Matrix, int N){
 	//open file for writing
 	FILE *file_output = fopen("product.dat", "w");
