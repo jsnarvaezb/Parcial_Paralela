@@ -1,7 +1,7 @@
 #include <stdio.h>
 int N;
 
-/* matrixMultCPU(int a[N][N], int b[N][N], int c[N][N]) {
+matrixMultCPU(int a[N][N], int b[N][N], int c[N][N]) {
  int n,m;
  for (int i = 0; i < N; i++) {
   for (int j = 0; j < N; j++) {
@@ -14,7 +14,7 @@ int N;
    c[i][j] = sum;
   }
  }
-}*/
+}
 
 __global__ void matrixMultGPU(int *a, int *b, int *c,int N) {
  int k, sum = 0;
