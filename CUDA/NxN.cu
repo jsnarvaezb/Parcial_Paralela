@@ -103,20 +103,7 @@ void output_file(float* ANS_Matrix, int N){
 	}
 	fclose ( file_output );
 }
-void check_arguments( int argc, char *argv[] ){
-	//check for correct # of arguments
-	if (argc != 2){
-		printf ("Incorrect number of command line arugments.\r\n");
-		exit(1);
-	}
 
-	//check for command line input corresponds to positive number
-	int current = atoi(argv[1]);
-	if (current < 0 ){
-		printf ("The arugment which is equal to %d  is less than zero.\r\n", current);
-		exit(1);
-	}
-}
 //below is to round floating point numbers incase the input argument is a float point number
 int round_gaurav(double number)
 {
@@ -127,8 +114,7 @@ int round_gaurav(double number)
 
 int main ( int argc, char *argv[] )
 {
-	//check if arguments are good
-	check_arguments(argc, argv);
+
 
 	//treat each number as a float
 	//round then to the nearest integer
@@ -136,7 +122,7 @@ int main ( int argc, char *argv[] )
 	// ex 5.6 = 6.0
 	//named round_gaurav because it avoids warning error of conflict types with built-in function
 	int N = atof(argv[1]);
-  //int B = atof(argv[2])
+  int B = atof(argv[2]);
 
 	printf("T = %d\n",TILE_WIDTH);
 
@@ -169,7 +155,7 @@ int main ( int argc, char *argv[] )
 	cudaMemcpy(dev_B_Matrix, B_Matrix, size, cudaMemcpyHostToDevice);
 
 	//the number of blocks is dependent on the tile width
-	dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
+	dim3 dimBlock(B, B);
 	//the number of threads
 	//need to add plus 1 because need some calculations are not completed then
 	dim3 dimGrid((int)ceil(N/dimBlock.x) + 1, (int)ceil(N/dimBlock.y) + 1);
