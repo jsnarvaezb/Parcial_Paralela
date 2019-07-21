@@ -16,7 +16,7 @@ int N;
  }
 }*/
 
-__global__ void matrixMultGPU(int *a, int *b, int *c,int N) {
+__global__ void matrixMultGPU(float *a, float *b, float *c,int N) {
  int k, sum = 0;
  int col = threadIdx.x + blockDim.x * blockIdx.x;
  int fil = threadIdx.y + blockDim.y * blockIdx.y;
@@ -35,8 +35,11 @@ int main(int argc, char const *argv[]) {
  gridSize=atoi(argv[2]);
  blockSize= atoi(argv[3]);
 
- int a[N*N], b[N*N], c[N*N];
- int *dev_a, *dev_b, *dev_c;
+ float *c = (float *)malloc(N * N * sizeof(float));
+ float *a = (float *)malloc(N * N * sizeof(float));
+ float *b = (float *)malloc(N * N * sizeof(float));
+
+ float *dev_a, *dev_b, *dev_c;
  int cont,i,j;
 
   /* inicializando variables con datos foo*/
