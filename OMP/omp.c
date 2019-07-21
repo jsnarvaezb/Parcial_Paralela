@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
 			}
 		}
 	}
-
+  if (argv[2]!=NULL){
 	printf("Matrix A --------------------\n");
   for (int y = 0; y < N; y++) {
    for (int x = 0; x < N; x++) {
@@ -67,6 +67,6 @@ int main(int argc, char const *argv[])
   }
   printf("\n");
  }
-
+}
 	return 0;
 }
