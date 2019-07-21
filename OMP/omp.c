@@ -44,5 +44,29 @@ int main(int argc, char const *argv[])
 		}
 	}
 
+	printf("Matrix A --------------------\n");
+  for (int y = 0; y < N; y++) {
+   for (int x = 0; x < N; x++) {
+
+    printf("%f ", a[y * N + x]);
+   }
+   printf("\n");
+  }
+  printf("Matrix B --------------------\n");
+  for (int y = 0; y < N; y++) {
+   for (int x = 0; x < N; x++) {
+    printf("%f ", b[y * N + x]);
+   }
+   printf("\n");
+  }
+  printf("Matrix C --------------------\n");
+
+ for (int y = 0; y < N; y++) {
+  for (int x = 0; x < N; x++) {
+   printf("%f ", c[y * N + x]);
+  }
+  printf("\n");
+ }
+
 	return 0;
 }
