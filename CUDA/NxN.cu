@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <unistd.h>
 #define TILE_WIDTH 32
 
 __global__ void matrixMult(float *A, float *B, float *C, int width);
@@ -75,13 +74,13 @@ void fill_matrices(float *A_Matrix, float *B_Matrix, int N){
 	for (i = 0; i <  N; i++){
 		for (j = 0; j < N; j++){
 
-			*(A_Matrix + i*N + j) = rand()%10)+1;
+			*(A_Matrix + i*N + j) = (rand()%10)+1;
 		}
 	}
 	for (i = 0; i <  N; i++){
 		for (j = 0; j < N; j++){
 
-			*(B_Matrix + i*N + j) = rand()%10)+1;
+			*(B_Matrix + i*N + j) = (rand()%10)+1;
 		}
 	}
 }
