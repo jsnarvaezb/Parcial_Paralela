@@ -1,4 +1,4 @@
-/ Gaurav Sheni
+
 // CSC 391
 // September 30, 2015
 // Project 2
