@@ -87,7 +87,7 @@ void fill_matrices(float *A_Matrix, float *B_Matrix, int N){
 
 void output_file(float* ANS_Matrix, int N){
 	//open file for writing
-	FILE *file_output = fopen("product.dat", "w");
+	FILE *file_output = fopen("product.txt", "w");
 	if (file_output == NULL) {
 	    printf("File could not be created. ");
 	    exit(1);
@@ -124,7 +124,7 @@ int main ( int argc, char *argv[] )
 	int N = atof(argv[1]);
   int B = atof(argv[2]);
 
-	printf("T = %d\n",TILE_WIDTH);
+	printf("T = %d\n",N, B);
 
 	//Create the matrices
 	//below was in class given information
