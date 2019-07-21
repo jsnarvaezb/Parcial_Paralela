@@ -1,7 +1,7 @@
 #include <stdio.h>
-#define N 16
+//#define N 16
 
-void matrixMultCPU(int a[N][N], int b[N][N], int c[N][N]) {
+/* matrixMultCPU(int a[N][N], int b[N][N], int c[N][N]) {
  int n,m;
  for (int i = 0; i < N; i++) {
   for (int j = 0; j < N; j++) {
@@ -14,9 +14,9 @@ void matrixMultCPU(int a[N][N], int b[N][N], int c[N][N]) {
    c[i][j] = sum;
   }
  }
-}
+}*/
 
-__global__ void matrixMultGPU(int *a, int *b, int *c) {
+__global__ void matrixMultGPU(int *a, int *b, int *c,N) {
  int k, sum = 0;
  int col = threadIdx.x + blockDim.x * blockIdx.x;
  int fil = threadIdx.y + blockDim.y * blockIdx.y;
@@ -29,7 +29,9 @@ __global__ void matrixMultGPU(int *a, int *b, int *c) {
  }
 }
 
-int main() {
+int main(int argc, char const *argv[]) {
+ int N = atoi(argv[1]);
+
  int a[N][N], b[N][N], c[N][N];
  int *dev_a, *dev_b, *dev_c;
  int cont,i,j;
@@ -63,12 +65,12 @@ int main() {
  cudaFree(dev_c);
 
   // imprimiendo
- for (int y = 0; y < N; y++) {
-  for (int x = 0; x < N; x++) {
-   printf("[%d][%d]=%d ", y, x, c[y][x]);
-  }
-  printf("\n");
- }
+ //for (int y = 0; y < N; y++) {
+  //for (int x = 0; x < N; x++) {
+   //printf("[%d][%d]=%d ", y, x, c[y][x]);
+  //}
+  //printf("\n");
+ //}
 
   return 0;
 
