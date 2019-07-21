@@ -174,7 +174,7 @@ int main ( int argc, char *argv[] )
 	start = clock();
 
 	//do matrix multiple
-	matrixMult<<<dimGrid, dimBlock>>>(dev_A_Matrix, dev_B_Matrix, dev_ANS_Matrix, N);
+	matrixMult<<<T, B>>>(dev_A_Matrix, dev_B_Matrix, dev_ANS_Matrix, N);
 
 	//wait for all calculations to finish
 	cudaDeviceSynchronize();
