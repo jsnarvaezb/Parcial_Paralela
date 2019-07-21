@@ -11,6 +11,7 @@ __global__ void matrixMultGPU(float *a, float *b, float *c,int N) {
     sum += a[fil * N + k] * b[k * N + col];
    }
    c[fil * N + col] = sum;
+   sum=0;
  }
 
   //if (col < N && fil < N) {
