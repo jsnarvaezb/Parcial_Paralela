@@ -31,6 +31,9 @@ __global__ void matrixMultGPU(int *a, int *b, int *c,int N) {
 
 int main(int argc, char const *argv[]) {
  N = atoi(argv[1]);
+ int blockSize, gridSize;
+ gridSize=atoi(argv[2]);
+ blockSize= atoi(argv[3]);
 
  int a[N][N], b[N][N], c[N][N];
  int *dev_a, *dev_b, *dev_c;
@@ -53,10 +56,14 @@ int main(int argc, char const *argv[]) {
   cudaMemcpy(dev_a, a, size, cudaMemcpyHostToDevice);
  cudaMemcpy(dev_b, b, size, cudaMemcpyHostToDevice);
 
-  dim3 dimGrid(1, 1);
-  dim3 dimBlock(N, N);
+  //dim3 dimGrid(1, 1);
+  //dim3 dimBlock(N, N);
 
-  matrixMultGPU<<<dimGrid, dimBlock>>>(dev_a, dev_b, dev_c, N);
+
+  //blockSize = 1024;
+  //gridSize = (int)ceil((float)N/blockSize);
+
+  matrixMultGPU<<<gridSize, blockSize>>>(dev_a, dev_b, dev_c, N);
 
   cudaMemcpy(c, dev_c, size, cudaMemcpyDeviceToHost);
 
