@@ -60,8 +60,8 @@ int main(int argc, char const *argv[]) {
   //dim3 dimBlock(N, N);
 
 
-  blockSize = 1024;
-  gridSize = (int)ceil((float)N/blockSize);
+  //blockSize = 1024;
+  //gridSize = (int)ceil((float)N/blockSize);
 
   matrixMultGPU<<<gridSize, blockSize>>>(dev_a, dev_b, dev_c, N);
 
