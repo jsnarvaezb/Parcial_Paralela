@@ -1,7 +1,7 @@
 #include <stdio.h>
 int N;
 
-matrixMultCPU(int a[N][N], int b[N][N], int c[N][N]) {
+matrixMultCPU(int a[][], int b[][], int c[][], int N) {
  int n,m;
  for (int i = 0; i < N; i++) {
   for (int j = 0; j < N; j++) {
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[]) {
   dim3 dimGrid(1, 1);
   dim3 dimBlock(N, N);
 
-  matrixMultGPU<<<dimGrid, dimBlock>>>(dev_a, dev_b, dev_c);
+  matrixMultGPU<<<dimGrid, dimBlock>>>(dev_a, dev_b, dev_c, N);
 
   cudaMemcpy(c, dev_c, size, cudaMemcpyDeviceToHost);
 
