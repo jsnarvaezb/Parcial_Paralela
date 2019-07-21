@@ -123,7 +123,7 @@ int main ( int argc, char *argv[] )
 	//named round_gaurav because it avoids warning error of conflict types with built-in function
 	int N = atof(argv[1]);
   int B = atof(argv[2]);
-  int T = atof(argv[2]);
+  int T = atof(argv[3]);
 
 	//printf("T = %d\n",N, B);
 
@@ -159,7 +159,7 @@ int main ( int argc, char *argv[] )
 	dim3 dimBlock(B, B);
 	//the number of threads
 	//need to add plus 1 because need some calculations are not completed then
-	dim3 dimGrid(T);//(int)ceil(N/dimBlock.x) + 1, (int)ceil(N/dimBlock.y) + 1);
+	dim3 dimGrid(T,T);//(int)ceil(N/dimBlock.x) + 1, (int)ceil(N/dimBlock.y) + 1);
 
 	//dummy call suggested by Cho
 	first_call<<<1,1>>>();
