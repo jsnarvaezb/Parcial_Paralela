@@ -42,8 +42,8 @@ int main(int argc, char const *argv[]) {
   /* inicializando variables con datos foo*/
  for (i = 0; i < N; i++) {
   for (j = 0; j < N; j++) {
-   a[i * n + j] = (rand()%10)+1;
-   b[i * n + j] = (rand()%10)+1;
+   a[i * N + j] = (rand()%10)+1;
+   b[i * N + j] = (rand()%10)+1;
   }
  }
 
