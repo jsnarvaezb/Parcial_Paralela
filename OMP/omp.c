@@ -7,20 +7,20 @@ int main(int argc, char const *argv[])
 {
 	int i, j;
 	//srand(time(NULL));
-	int n = atoi(argv[1]);
+	int N = atoi(argv[1]);
 	//int vector1[n][n], vector2[n][n], vectorSalida[n][n];
 
-	float *a = (float*) malloc(sizeof(float)*n*n);
-  float *b = (float*) malloc(sizeof(float)*n*n);
-  float *c = (float*) malloc(sizeof(float)*n*n);
+	float *a = (float*) malloc(sizeof(float)*N*N);
+  float *b = (float*) malloc(sizeof(float)*N*N);
+  float *c = (float*) malloc(sizeof(float)*N*N);
 
-	for(i = 0; i < n; i++)
+	for(i = 0; i < N; i++)
 	{
-		for(j = 0; j < n; j++)
+		for(j = 0; j < N; j++)
 		{
 			//vector1[i][j] = (rand()%10)+1;
-			a[i * n + j]= (rand()%10)+1;
-			b[i * n + j]= (rand()%10)+1;
+			a[i * N + j]= (rand()%10)+1;
+			b[i * N + j]= (rand()%10)+1;
 			//vector2[i][j] = (rand()%10)+1;
 		}
 	}
@@ -31,14 +31,14 @@ int main(int argc, char const *argv[])
 
 		#pragma omp for
 
-		for(i = 0; i < n; i++)
+		for(i = 0; i < N; i++)
 		{
-			for(j = 0; j < n; j++)
+			for(j = 0; j < N; j++)
 			{
-				c[i * n + j] = 0;
-				for(k = 0; k < n; k++)
+				c[i * N + j] = 0;
+				for(k = 0; k < N; k++)
 				{
-					c[i * n + j] += a[i * n + k] * b[k * n + j];
+					c[i * N + j] += a[i * N + k] * b[k * N + j];
 				}
 			}
 		}
