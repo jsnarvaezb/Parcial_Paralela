@@ -136,9 +136,9 @@ int main ( int argc, char *argv[] )
 	// ex 5.6 = 6.0
 	//named round_gaurav because it avoids warning error of conflict types with built-in function
 	int N = atof(argv[1]);
-  int B = atof(argv[2]);
+  //int B = atof(argv[2])
 
-	//printf("T = %d\n",TILE_WIDTH);
+	printf("T = %d\n",TILE_WIDTH);
 
 	//Create the matrices
 	//below was in class given information
@@ -169,7 +169,7 @@ int main ( int argc, char *argv[] )
 	cudaMemcpy(dev_B_Matrix, B_Matrix, size, cudaMemcpyHostToDevice);
 
 	//the number of blocks is dependent on the tile width
-	dim3 dimBlock(B, B);
+	dim3 dimBlock(TILE_WIDTH, TILE_WIDTH);
 	//the number of threads
 	//need to add plus 1 because need some calculations are not completed then
 	dim3 dimGrid((int)ceil(N/dimBlock.x) + 1, (int)ceil(N/dimBlock.y) + 1);
