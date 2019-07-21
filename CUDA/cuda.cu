@@ -35,7 +35,7 @@ int main(int argc, char const *argv[]) {
  gridSize=atoi(argv[2]);
  blockSize= atoi(argv[3]);
 
- int a[N][N], b[N][N], c[N][N];
+ int a[N*N], b[N*N], c[N*N];
  int *dev_a, *dev_b, *dev_c;
  int cont,i,j;
 
@@ -49,11 +49,11 @@ int main(int argc, char const *argv[]) {
 
   int size = N * N * sizeof(int);
 
-  cudaMalloc((void **) &dev_a, size);
+ cudaMalloc((void **) &dev_a, size);
  cudaMalloc((void **) &dev_b, size);
  cudaMalloc((void **) &dev_c, size);
 
-  cudaMemcpy(dev_a, a, size, cudaMemcpyHostToDevice);
+ cudaMemcpy(dev_a, a, size, cudaMemcpyHostToDevice);
  cudaMemcpy(dev_b, b, size, cudaMemcpyHostToDevice);
 
   //dim3 dimGrid(1, 1);
