@@ -124,7 +124,7 @@ int main ( int argc, char *argv[] )
 	int N = atof(argv[1]);
   int B = atof(argv[2]);
 
-	printf("T = %d\n",N, B);
+	//printf("T = %d\n",N, B);
 
 	//Create the matrices
 	//below was in class given information
