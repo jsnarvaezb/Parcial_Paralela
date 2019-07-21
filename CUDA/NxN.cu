@@ -197,6 +197,6 @@ int main ( int argc, char *argv[] )
 
 	//debugging purposes
 	//print_matrices(A_Matrix,B_Matrix,ANS_Matrix, N);
-  print_matrices(*A_Matrix, *B_Matrix, *ANS_Matrix, N);
+  print_matrices(A_Matrix, B_Matrix, ANS_Matrix, N);
 
 }
