@@ -1,5 +1,5 @@
 #include <stdio.h>
-//#define N 16
+int N;
 
 /* matrixMultCPU(int a[N][N], int b[N][N], int c[N][N]) {
  int n,m;
@@ -30,7 +30,7 @@ __global__ void matrixMultGPU(int *a, int *b, int *c,int N) {
 }
 
 int main(int argc, char const *argv[]) {
- int N = atoi(argv[1]);
+ N = atoi(argv[1]);
 
  int a[N][N], b[N][N], c[N][N];
  int *dev_a, *dev_b, *dev_c;
