@@ -121,8 +121,8 @@ int main ( int argc, char *argv[] )
 	// ex 5.6 = 6.0
 	//named round_gaurav because it avoids warning error of conflict types with built-in function
 	int N = atof(argv[1]);
-  int B = atof(argv[2]);
-  int T = atof(argv[3]);
+  int B = atof(argv[3]);
+  int T = atof(argv[2]);
 
 	//printf("T = %d\n",N, B);
 
