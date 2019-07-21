@@ -1,4 +1,3 @@
-
 // CSC 391
 // September 30, 2015
 // Project 2
@@ -197,6 +196,6 @@ int main ( int argc, char *argv[] )
 
 	//debugging purposes
 	//print_matrices(A_Matrix,B_Matrix,ANS_Matrix, N);
-  print_matrices(A_Matrix, B_Matrix, ANS_Matrix, N);
+  //print_matrices(A_Matrix, B_Matrix, ANS_Matrix, N);
 
 }
