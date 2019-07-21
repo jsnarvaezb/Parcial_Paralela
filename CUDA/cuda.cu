@@ -6,7 +6,7 @@ __global__ void matrixMultGPU(float *a, float *b, float *c,int N) {
  int col = threadIdx.x + blockDim.x * blockIdx.x;
  //int fil = threadIdx.y + blockDim.y * blockIdx.y;
 
- for(fil=0, fil<N; fil++){
+ for(fil=0; fil<N; fil++){
    for (k = 0; k < N; k++) {
     sum += a[fil * N + k] * b[k * N + col];
    }
