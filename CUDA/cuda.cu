@@ -2,16 +2,23 @@
 int N;
 
 __global__ void matrixMultGPU(float *a, float *b, float *c,int N) {
- int k, sum = 0;
+ int k, fil, sum = 0;
  int col = threadIdx.x + blockDim.x * blockIdx.x;
- int fil = threadIdx.y + blockDim.y * blockIdx.y;
+ //int fil = threadIdx.y + blockDim.y * blockIdx.y;
 
-  if (col < N && fil < N) {
-  for (k = 0; k < N; k++) {
-   sum += a[fil * N + k] * b[k * N + col];
-  }
-  c[fil * N + col] = sum;
+ for(fil=0, fil<N; fil++){
+   for (k = 0; k < N; k++) {
+    sum += a[fil * N + k] * b[k * N + col];
+   }
+   c[fil * N + col] = sum;
  }
+
+  //if (col < N && fil < N) {
+  //for (k = 0; k < N; k++) {
+   //sum += a[fil * N + k] * b[k * N + col];
+  //}
+  //c[fil * N + col] = sum;
+// }
 }
 
 int main(int argc, char const *argv[]) {
@@ -30,8 +37,8 @@ int main(int argc, char const *argv[]) {
   /* inicializando variables con datos foo*/
  for (i = 0; i < N; i++) {
   for (j = 0; j < N; j++) {
-   a[i * N + j] = (rand()%10)+1;
-   b[i * N + j] = (rand()%10)+1;
+   a[i * N + j] = (rand()%10);
+   b[i * N + j] = (rand()%10);
   }
  }
 
