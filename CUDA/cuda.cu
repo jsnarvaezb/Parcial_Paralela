@@ -36,11 +36,9 @@ int main() {
 
   /* inicializando variables con datos foo*/
  for (i = 0; i < N; i++) {
-  cont = 0;
   for (j = 0; j < N; j++) {
-   a[i][j] = cont;
-   b[i][j] = cont;
-   cont++;
+   a[i][j] = (rand()%10)+1;
+   b[i][j] = (rand()%10)+1;
   }
  }
 
