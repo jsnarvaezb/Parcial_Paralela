@@ -16,7 +16,7 @@
  }
 }*/
 
-__global__ void matrixMultGPU(int *a, int *b, int *c,N) {
+__global__ void matrixMultGPU(int *a, int *b, int *c,int N) {
  int k, sum = 0;
  int col = threadIdx.x + blockDim.x * blockIdx.x;
  int fil = threadIdx.y + blockDim.y * blockIdx.y;
