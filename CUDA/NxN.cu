@@ -186,7 +186,7 @@ int main ( int argc, char *argv[] )
 	matrixMult<<<dimGrid, dimBlock>>>(dev_A_Matrix, dev_B_Matrix, dev_ANS_Matrix, N);
 
 	//wait for all calculations to finish
-	cudaThreadSynchronize();
+	cudaDeviceSynchronize();
 
 	//STOP
 	stop = clock();
