@@ -1,4 +1,4 @@
-echo "Multiplicación de matrices en OMP" > resultados.txt
+echo "Multiplicación de matrices en CUDA" > resultados.txt
 
 
 for n in  8 16 32 64 128 256 512 1024  #Matrix
