@@ -6,9 +6,7 @@
 int main(int argc, char const *argv[])
 {
 	int i, j;
-	//srand(time(NULL));
 	int N = atoi(argv[1]);
-	//int vector1[n][n], vector2[n][n], vectorSalida[n][n];
 
 	float *a = (float*) malloc(sizeof(float)*N*N);
   float *b = (float*) malloc(sizeof(float)*N*N);
@@ -18,10 +16,8 @@ int main(int argc, char const *argv[])
 	{
 		for(j = 0; j < N; j++)
 		{
-			//vector1[i][j] = (rand()%10)+1;
-			a[i * N + j]= (rand()%10)+1;
-			b[i * N + j]= (rand()%10)+1;
-			//vector2[i][j] = (rand()%10)+1;
+			a[i * N + j]= (rand()%10);
+			b[i * N + j]= (rand()%10);
 		}
 	}
 
