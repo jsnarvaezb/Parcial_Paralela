@@ -13,13 +13,6 @@ __global__ void matrixMultGPU(float *a, float *b, float *c,int N) {
    c[fil * N + col] = sum;
    sum=0;
  }
-
-  //if (col < N && fil < N) {
-  //for (k = 0; k < N; k++) {
-   //sum += a[fil * N + k] * b[k * N + col];
-  //}
-  //c[fil * N + col] = sum;
-// }
 }
 
 int main(int argc, char const *argv[]) {
@@ -51,13 +44,6 @@ int main(int argc, char const *argv[]) {
 
  cudaMemcpy(dev_a, a, size, cudaMemcpyHostToDevice);
  cudaMemcpy(dev_b, b, size, cudaMemcpyHostToDevice);
-
-  //dim3 dimGrid(1, 1);
-  //dim3 dimBlock(N, N);
-
-
-  //blockSize = 1024;
-  //gridSize = (int)ceil((float)N/blockSize);
 
   matrixMultGPU<<<gridSize, blockSize>>>(dev_a, dev_b, dev_c, N);
 
