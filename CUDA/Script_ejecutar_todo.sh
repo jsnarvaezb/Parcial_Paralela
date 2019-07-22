@@ -8,7 +8,7 @@ for n in  8 16 32 64 128 256 512 1024  #Matrix
 		for b in 8 16 32 64#Blocks
 			do
 					echo "Ejecucion matrix $n x $n con $t hilos y $b bloques." >> resultados.txt
-							(!time ./cuda $n $b $t) &>> resultados.txt
+							(time ./cuda $n $b $t) &>> resultados.txt
 			done
 		done
   done
