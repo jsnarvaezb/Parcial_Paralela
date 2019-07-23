@@ -26,8 +26,8 @@ main(int argc, char **argv)
   if (taskid == 0) {
     for (i=0; i<N; i++) {
       for (j=0; j<N; j++) {
-        a[i][j]= (rand()%10);
-        b[i][j]= (rand()%10);
+        a[i][j]= (int)(rand()%10);
+        b[i][j]= (int)(rand()%10);
       }
     }
 
