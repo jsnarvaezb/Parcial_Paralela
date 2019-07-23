@@ -19,8 +19,8 @@ static void init_matrix(void)
     for (i = 0; i < SIZE; i++)
     {
         for (j = 0; j < SIZE; j++) {
-              a[i][j] = 1;
-              b[i][j] = 1;
+              a[i][j] = (rand()%10);
+              b[i][j] = (rand()%10);
 
        } //end for i
     }  //end for j
@@ -122,7 +122,26 @@ mtype = FROM_MASTER; //  =1
             }//end for i
         } //end for l
         end_time = MPI_Wtime();
-        print_matrix();
+        printf("Here is the matrix A:\n");
+        for (i=0; i<N; i++) {
+          for (j=0; j<N; j++)
+            printf("%6.2f   ", a[i][j]);
+          printf ("\n");
+        }
+
+        printf("Here is the matrix B:\n");
+        for (i=0; i<N; i++) {
+          for (j=0; j<N; j++)
+            printf("%6.2f   ", b[i][j]);
+          printf ("\n");
+        }
+
+         printf("Here is the result matrix:\n");
+         for (i=0; i<N; i++) {
+           for (j=0; j<N; j++)
+             printf("%6.2f   ", c[i][j]);
+           printf ("\n");
+         }
        }//end else
    } //end if (myrank == 0)
 
