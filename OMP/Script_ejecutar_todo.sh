@@ -8,3 +8,4 @@ for i in  8 16 32 64 128 256 512 1024  #Imagenes
 		echo "Ejecucion $i x $i con $t hilos." >> resultados.txt
 					(time ./omp "$i" "$t") &>> resultados.txt
   done
+  done 
