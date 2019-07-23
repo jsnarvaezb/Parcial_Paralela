@@ -55,5 +55,5 @@ int main(int argc, char **argv)
     MPI_Finalize();
     free(a);
     free(b);
-    free(c); 
-}
+    free(c);
+} 
