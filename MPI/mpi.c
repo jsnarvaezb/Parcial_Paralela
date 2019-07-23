@@ -27,8 +27,6 @@ main(int argc, char **argv)
       }
     }
 
-    gettimeofday(&start, 0);
-
     /* send matrix data to the worker tasks */
     rows = N/numworkers;
     offset = 0;
