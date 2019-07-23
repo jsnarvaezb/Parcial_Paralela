@@ -1,20 +1,26 @@
 #include <stdio.h>
 #include "mpi.h"
 
-int main(int argc, char *argv[])
+MPI_Status status;
+
+main(int argc, char **argv)
 {
-	int N = atoi(argv[1]);
-  MPI_Status status;
-  int me,p;
-  int i,j,k;
-  int a[N][N],b[N][N],c[N][N];
+  int numtasks,taskid,numworkers,source,dest,rows,offset,i,j,k;
+  int N = atoi(argv[1]);
+  struct timeval start, stop;
+  double a[N][N],b[N][N],c[N][N];
+  MPI_Init(&argc, &argv);
+  MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
+  MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
 
-	int numtasks,taskid;
+  numworkers = numtasks-1;
+  char processor_name[MPI_MAX_PROCESSOR_NAME];
+  int name_len;
+  MPI_Get_processor_name(processor_name, &name_len);
+  printf("Hello from processor %s, rank %d out of %d processors\n",
+        processor_name, taskid, numtasks);
 
-	MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
-	MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
-
-	if (taskid == 0) {
+  if (taskid == 0) {
     for (i=0; i<N; i++) {
       for (j=0; j<N; j++) {
         a[i][j]= (rand()%10);
@@ -22,76 +28,67 @@ int main(int argc, char *argv[])
       }
     }
 
-  /* Start up MPI */
+    rows = N/numworkers;
+    offset = 0;
 
-  MPI_Init(&argc, &argv);
-  MPI_Comm_rank(MPI_COMM_WORLD, &me);
-  MPI_Comm_size(MPI_COMM_WORLD, &p);
+    for (dest=1; dest<=numworkers; dest++)
+    {
+      MPI_Send(&offset, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
+      MPI_Send(&rows, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
+      MPI_Send(&a[offset][0], rows*N, MPI_DOUBLE,dest,1, MPI_COMM_WORLD);
+      MPI_Send(&b, N*N, MPI_DOUBLE, dest, 1, MPI_COMM_WORLD);
+      offset = offset + rows;
+    }
 
-  printf("me=%d, p=%d", me, p);
+    for (i=1; i<=numworkers; i++)
+    {
+      source = i;
+      MPI_Recv(&offset, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
+      MPI_Recv(&rows, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
+      MPI_Recv(&c[offset][0], rows*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
+    }
 
-  /* Data distribution */
-  if (me == 0) // master
-  {
-      // assume p = 2
-      for (i=1; i<p; i++)
-      {
-          printf("send to  %d with data from: %d and size:%d \n", i, (i)*N/p, N*N/p);
-          MPI_Send(&a[i * N / p][0], N * N / p, MPI_INT, i, 0, MPI_COMM_WORLD);
-          MPI_Send(b, N * N, MPI_INT, i, 0, MPI_COMM_WORLD);
+   /*printf("Matriz A:\n");
+   for (i=0; i<N; i++) {
+     for (j=0; j<N; j++)
+       printf("%3.2f   ", a[i][j]);
+     printf ("\n");
+   }
+
+   printf("Matriz B:\n");
+   for (i=0; i<N; i++) {
+     for (j=0; j<N; j++)
+       printf("%3.2f   ", b[i][j]);
+     printf ("\n");
+   }
+
+    printf("Resultado:\n");
+    for (i=0; i<N; i++) {
+      for (j=0; j<N; j++)
+        printf("%3.2f   ", c[i][j]);
+      printf ("\n");
+    }*/
+  }
+
+  if (taskid > 0) {
+    source = 0;
+    MPI_Recv(&offset, 1, MPI_INT, source, 1, MPI_COMM_WORLD, &status);
+    MPI_Recv(&rows, 1, MPI_INT, source, 1, MPI_COMM_WORLD, &status);
+    MPI_Recv(&a, rows*N, MPI_DOUBLE, source, 1, MPI_COMM_WORLD, &status);
+    MPI_Recv(&b, N*N, MPI_DOUBLE, source, 1, MPI_COMM_WORLD, &status);
+
+    for (k=0; k<N; k++)
+      for (i=0; i<rows; i++) {
+        c[i][k] = 0.0;
+        for (j=0; j<N; j++)
+          c[i][k] = c[i][k] + a[i][j] * b[j][k];
       }
+
+
+    MPI_Send(&offset, 1, MPI_INT, 0, 2, MPI_COMM_WORLD);
+    MPI_Send(&rows, 1, MPI_INT, 0, 2, MPI_COMM_WORLD);
+    MPI_Send(&c, rows*N, MPI_DOUBLE, 0, 2, MPI_COMM_WORLD);
   }
-  else
-  {
-      printf("Recv from %d with data from: %d and size:%d \n", 0, (me)*N/p, N*N/p);
-      MPI_Recv(&a[me * N / p][0], N * N / p, MPI_INT, i, 0, MPI_COMM_WORLD, 0);
-      MPI_Recv(b, N * N, MPI_INT, i, 0, MPI_COMM_WORLD, 0);
-
-  }
-  /* Computation */
-  for(i=me * N / p; i<(me+1) * N/p; ++i)
-  {
-      for (j=0; j < N; j++)
-      {
-          c[i][j] = 0;
-          for (k=0; k<N; k++)
-          {
-              c[i][j] += a[i][k] * b[k][j];
-          }
-      }
-  }
-
-  /* Result gathering */
-  if (me != 0 )
-  {
-      MPI_Send(&c[(me) * N/p][0], N*N/p, MPI_INT, 0, 0, MPI_COMM_WORLD);
-  }
-  else
-  {
-      for (i=1; i<p; i++)
-      {
-          MPI_Recv(&c[i * N/p][0], N * N / p, MPI_INT, i, 0, MPI_COMM_WORLD, 0);
-      }
-  }
-
-  MPI_Barrier(MPI_COMM_WORLD);
-
-
-  /* print the matrix */
-  if (me == 0)
-  {
-      for (i=0; i<N; i++) {
-          printf("\n\t| ");
-          for (j=0; j<N; j++)
-              printf("%2d ", c[i][j]);
-          printf("|");
-      }
-  }
-
-
-  /* Quit */
 
   MPI_Finalize();
-  return 0;
-}
 }
