@@ -17,9 +17,9 @@ main(int argc, char **argv)
   MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
 
   numworkers = numtasks-1;
-
-  printf("Hello rank %d out of %d processors\n",
-        taskid, numtasks);
+  MPI_Get_processor_name(processor_name, &name_len);
+  printf("Hello from processor %s, rank %d out of %d processors\n",
+        processor_name, taskid, numtasks);
 
   /*---------------------------- master ----------------------------*/
   if (taskid == 0) {
