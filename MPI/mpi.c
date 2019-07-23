@@ -18,6 +18,9 @@ main(int argc, char **argv)
 
   numworkers = numtasks-1;
 
+  printf("Hello rank %d out of %d processors\n",
+        taskid, numtasks);
+
   /*---------------------------- master ----------------------------*/
   if (taskid == 0) {
     for (i=0; i<N; i++) {
