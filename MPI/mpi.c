@@ -54,26 +54,7 @@ main(int argc, char **argv)
       MPI_Recv(&c[offset][0], rows*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
     }
 
-   printf("Here is the matrix A:\n");
-   for (i=0; i<N; i++) {
-     for (j=0; j<N; j++)
-       printf("%6.2f   ", a[i][j]);
-     printf ("\n");
-   }
 
-   printf("Here is the matrix B:\n");
-   for (i=0; i<N; i++) {
-     for (j=0; j<N; j++)
-       printf("%6.2f   ", b[i][j]);
-     printf ("\n");
-   }
-
-    printf("Here is the result matrix:\n");
-    for (i=0; i<N; i++) {
-      for (j=0; j<N; j++)
-        printf("%6.2f   ", c[i][j]);
-      printf ("\n");
-    }
   }
 
   /*---------------------------- worker----------------------------*/
@@ -91,7 +72,26 @@ main(int argc, char **argv)
         for (j=0; j<N; j++)
           c[i][k] = c[i][k] + a[i][j] * b[j][k];
       }
+      printf("Here is the matrix A:\n");
+      for (i=0; i<N; i++) {
+        for (j=0; j<N; j++)
+          printf("%6.2f   ", a[i][j]);
+        printf ("\n");
+      }
 
+      printf("Here is the matrix B:\n");
+      for (i=0; i<N; i++) {
+        for (j=0; j<N; j++)
+          printf("%6.2f   ", b[i][j]);
+        printf ("\n");
+      }
+
+       printf("Here is the result matrix:\n");
+       for (i=0; i<N; i++) {
+         for (j=0; j<N; j++)
+           printf("%6.2f   ", c[i][j]);
+         printf ("\n");
+       }
 
     MPI_Send(&offset, 1, MPI_INT, 0, 2, MPI_COMM_WORLD);
     MPI_Send(&rows, 1, MPI_INT, 0, 2, MPI_COMM_WORLD);
