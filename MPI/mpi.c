@@ -48,7 +48,7 @@ main(int argc, char **argv)
       source = i;
       MPI_Recv(&offset, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
       MPI_Recv(&col, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
-      MPI_Recv(&c[offset][0], col*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
+      MPI_Recv(&c[offset*N], col*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
     }
 
    /*printf("Matriz A:\n");
