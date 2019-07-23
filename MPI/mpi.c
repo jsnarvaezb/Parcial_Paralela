@@ -8,10 +8,7 @@ main(int argc, char **argv)
   int numtasks,taskid,numworkers,source,dest,col,offset,i,j,k;
   int N = atoi(argv[1]);
   struct timeval start, stop;
-  int *a = (int*) malloc(sizeof(int)*N*N);
-  int *b = (int*) malloc(sizeof(int)*N*N);
-  int *c = (int*) malloc(sizeof(int)*N*N);
-
+  double a[N][N],b[N][N],c[N][N];
   MPI_Init(&argc, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
   MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
@@ -26,8 +23,8 @@ main(int argc, char **argv)
   if (taskid == 0) {
     for (i=0; i<N; i++) {
       for (j=0; j<N; j++) {
-        a[i * N + j]= (int)(rand()%10);
-        b[i * N + j]= (int)(rand()%10);
+        a[i][j]= (rand()%10);
+        b[i][j]= (rand()%10);
       }
     }
 
@@ -38,7 +35,7 @@ main(int argc, char **argv)
     {
       MPI_Send(&offset, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
       MPI_Send(&col, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
-      MPI_Send(&a[offset*N], col*N, MPI_DOUBLE,dest,1, MPI_COMM_WORLD);
+      MPI_Send(&a[offset][0], col*N, MPI_DOUBLE,dest,1, MPI_COMM_WORLD);
       MPI_Send(&b, N*N, MPI_DOUBLE, dest, 1, MPI_COMM_WORLD);
       offset = offset + col;
     }
@@ -48,7 +45,7 @@ main(int argc, char **argv)
       source = i;
       MPI_Recv(&offset, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
       MPI_Recv(&col, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
-      MPI_Recv(&c[offset*N], col*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
+      MPI_Recv(&c[offset][0], col*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
     }
 
    /*printf("Matriz A:\n");
@@ -82,9 +79,9 @@ main(int argc, char **argv)
 
     for (k=0; k<N; k++)
       for (i=0; i<col; i++) {
-        c[i * N + j] = 0.0;
+        c[i][k] = 0.0;
         for (j=0; j<N; j++)
-          c[i * N + j] +=  a[i * N + k] * b[k * N + j];
+          c[i][k] = c[i][k] + a[i][j] * b[j][k];
       }
 
 
