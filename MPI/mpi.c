@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "mpi.h"
-#define N               4        /* number of rows and columns in matrix */
+#define N               4
 
 MPI_Status status;
 
@@ -22,8 +22,8 @@ main(int argc, char **argv)
   if (taskid == 0) {
     for (i=0; i<N; i++) {
       for (j=0; j<N; j++) {
-        a[i][j]= 1.0;
-        b[i][j]= 2.0;
+        a[i][j]= (rand()%10);
+        b[i][j]= (rand()%10);
       }
     }
 
@@ -49,6 +49,19 @@ main(int argc, char **argv)
       MPI_Recv(&c[offset][0], rows*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
     }
 
+   printf("Here is the matrix A:\n");
+   for (i=0; i<N; i++) {
+     for (j=0; j<N; j++)
+       printf("%6.2f   ", a[i][j]);
+     printf ("\n");
+   }
+
+   printf("Here is the matrix B:\n");
+   for (i=0; i<N; i++) {
+     for (j=0; j<N; j++)
+       printf("%6.2f   ", b[i][j]);
+     printf ("\n");
+   }
 
     printf("Here is the result matrix:\n");
     for (i=0; i<N; i++) {
