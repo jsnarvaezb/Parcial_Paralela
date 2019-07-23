@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
 	{
 		int i, j, k, suma = 0;
 
-		#pragma omp parallel for
+		#pragma omp parallel for collapse(2)
 
 		for(i = 0; i < N; i++)
 		{
