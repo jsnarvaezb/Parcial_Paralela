@@ -26,8 +26,8 @@ main(int argc, char **argv)
   if (taskid == 0) {
     for (i=0; i<N; i++) {
       for (j=0; j<N; j++) {
-        a[i][j]= (int)(rand()%10);
-        b[i][j]= (int)(rand()%10);
+        a[i * N + j]= (int)(rand()%10);
+        b[i * N + j]= (int)(rand()%10);
       }
     }
 
@@ -38,7 +38,7 @@ main(int argc, char **argv)
     {
       MPI_Send(&offset, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
       MPI_Send(&col, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
-      MPI_Send(&a[offset][0], col*N, MPI_DOUBLE,dest,1, MPI_COMM_WORLD);
+      MPI_Send(&a[offset*N], col*N, MPI_DOUBLE,dest,1, MPI_COMM_WORLD);
       MPI_Send(&b, N*N, MPI_DOUBLE, dest, 1, MPI_COMM_WORLD);
       offset = offset + col;
     }
@@ -82,9 +82,9 @@ main(int argc, char **argv)
 
     for (k=0; k<N; k++)
       for (i=0; i<col; i++) {
-        c[i][k] = 0.0;
+        c[i * N + j] = 0.0;
         for (j=0; j<N; j++)
-          c[i][k] = c[i][k] + a[i][j] * b[j][k];
+          c[i * N + j] +=  a[i * N + k] * b[k * N + j];
       }
 
 
