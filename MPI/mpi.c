@@ -16,7 +16,7 @@ main(int argc, char **argv)
   MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
   MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
 
-  numworkers = numtasks-1;
+  numworkers = numtasks;
 
   /*---------------------------- master ----------------------------*/
   if (taskid == 0) {
