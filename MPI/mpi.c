@@ -1,94 +1,59 @@
 #include <stdio.h>
-#include "mpi.h"
+#include <stdlib.h>
+#include <float.h>
+#include <mpi.h>
 
-MPI_Status status;
-
-main(int argc, char **argv)
+int n, p;
+int main(int argc, char **argv)
 {
-  int numtasks,taskid,numworkers,source,dest,rows,offset,i,j,k;
-  int N = atoi(argv[1]);
-  struct timeval start, stop;
-  double a[N][N],b[N][N],c[N][N];
-  MPI_Init(&argc, &argv);
-  MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
-  MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
-
-  numworkers = numtasks-1;
-  char processor_name[MPI_MAX_PROCESSOR_NAME];
-  int name_len;
-  MPI_Get_processor_name(processor_name, &name_len);
-  printf("Hello from processor %s, rank %d out of %d processors\n",
-        processor_name, taskid, numtasks);
-
-  if (taskid == 0) {
-    for (i=0; i<N; i++) {
-      for (j=0; j<N; j++) {
-        a[i][j]= (rand()%10);
-        b[i][j]= (rand()%10);
-      }
-    }
-
-    rows = N/numworkers;
-    offset = 0;
-
-    for (dest=1; dest<=numworkers; dest++)
+    int myn, myrank;
+    double *a, *b, *c, *allB, start, sum, *allC, sumdiag;
+    int i, j, k;
+    n = atoi(argv[1]);
+    MPI_Init(&argc, &argv);
+    MPI_Comm_size(MPI_COMM_WORLD,&p);
+    MPI_Comm_rank(MPI_COMM_WORLD,&myrank);
+    myn = n/p;
+    a = malloc(myn*n*sizeof(double));
+    b = malloc(myn*n*sizeof(double));
+    c = malloc(myn*n*sizeof(double));
+    allB = malloc(n*n*sizeof(double));
+    for(i=0; i<myn*n; i++)
     {
-      MPI_Send(&offset, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
-      MPI_Send(&rows, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
-      MPI_Send(&a[offset][0], rows*N, MPI_DOUBLE,dest,1, MPI_COMM_WORLD);
-      MPI_Send(&b, N*N, MPI_DOUBLE, dest, 1, MPI_COMM_WORLD);
-      offset = offset + rows;
+        a[i] = 1.;
+        b[i] = 2.;
     }
+    MPI_Barrier(MPI_COMM_WORLD);
+    if(myrank==0)
+        start = MPI_Wtime();
 
-    for (i=1; i<=numworkers; i++)
+    for(i=0; i<p; i++)
+        MPI_Gather(b, myn*n, MPI_DOUBLE, allB, myn*n, MPI_DOUBLE,i, MPI_COMM_WORLD);
+    for(i=0; i<myn; i++)
+        for(j=0; j<n; j++)
+        {
+            sum = 0.;
+            for(k=0; k<n; k++)
+                sum += a[i*n+k]*allB[k*n+j];
+            c[i*n+j] = sum;
+        }
+    free(allB);
+    MPI_Barrier(MPI_COMM_WORLD);
+    if(myrank==0)
+        printf("It took %f seconds to multiply 2 %dx%d matrices.\n",MPI_Wtime()-start, n, n);
+    if(myrank==0)
+        allC = malloc(n*n*sizeof(double));
+    MPI_Gather(c, myn*n, MPI_DOUBLE, allC, myn*n, MPI_DOUBLE,0, MPI_COMM_WORLD);
+    if(myrank==0)
     {
-      source = i;
-      MPI_Recv(&offset, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
-      MPI_Recv(&rows, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
-      MPI_Recv(&c[offset][0], rows*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
+        for(i=0, sumdiag=0.; i<n; i++)
+            sumdiag += allC[i*n+i];
+        printf("The trace of the resulting matrix is %f\n", sumdiag);
     }
-
-   /*printf("Matriz A:\n");
-   for (i=0; i<N; i++) {
-     for (j=0; j<N; j++)
-       printf("%3.2f   ", a[i][j]);
-     printf ("\n");
-   }
-
-   printf("Matriz B:\n");
-   for (i=0; i<N; i++) {
-     for (j=0; j<N; j++)
-       printf("%3.2f   ", b[i][j]);
-     printf ("\n");
-   }
-
-    printf("Resultado:\n");
-    for (i=0; i<N; i++) {
-      for (j=0; j<N; j++)
-        printf("%3.2f   ", c[i][j]);
-      printf ("\n");
-    }*/
-  }
-
-  if (taskid > 0) {
-    source = 0;
-    MPI_Recv(&offset, 1, MPI_INT, source, 1, MPI_COMM_WORLD, &status);
-    MPI_Recv(&rows, 1, MPI_INT, source, 1, MPI_COMM_WORLD, &status);
-    MPI_Recv(&a, rows*N, MPI_DOUBLE, source, 1, MPI_COMM_WORLD, &status);
-    MPI_Recv(&b, N*N, MPI_DOUBLE, source, 1, MPI_COMM_WORLD, &status);
-
-    for (k=0; k<N; k++)
-      for (i=0; i<rows; i++) {
-        c[i][k] = 0.0;
-        for (j=0; j<N; j++)
-          c[i][k] = c[i][k] + a[i][j] * b[j][k];
-      }
-
-
-    MPI_Send(&offset, 1, MPI_INT, 0, 2, MPI_COMM_WORLD);
-    MPI_Send(&rows, 1, MPI_INT, 0, 2, MPI_COMM_WORLD);
-    MPI_Send(&c, rows*N, MPI_DOUBLE, 0, 2, MPI_COMM_WORLD);
-  }
-
-  MPI_Finalize();
+    if(myrank==0)
+        free(allC);
+    MPI_Finalize();
+    free(a);
+    free(b);
+    free(c);
 }
