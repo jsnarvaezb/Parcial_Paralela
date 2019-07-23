@@ -8,9 +8,13 @@ int main(int argc, char const *argv[])
 	int i, j;
 	int N = atoi(argv[1]);
 
-	float *a = (float*) malloc(sizeof(float)*N*N);
-  float *b = (float*) malloc(sizeof(float)*N*N);
-  float *c = (float*) malloc(sizeof(float)*N*N);
+	//float *a = (float*) malloc(sizeof(float)*N*N);
+  //float *b = (float*) malloc(sizeof(float)*N*N);
+  //float *c = (float*) malloc(sizeof(float)*N*N);
+
+  float a[N*N];
+	float b[N*N];
+  float c[N*N];
 
 	for(i = 0; i < N; i++)
 	{
@@ -29,7 +33,7 @@ int main(int argc, char const *argv[])
 		int k=0;
 		int suma = 0;
 
-		#pragma omp parallel for
+		#pragma omp for
 		for(i = 0; i < N; i++)
 		{
 			for(j = 0; j < N; j++)
@@ -43,9 +47,6 @@ int main(int argc, char const *argv[])
 		}
 }
 
-  free(a);
-	free(b);
-	free(c);
 
   if (argv[2]!=NULL){
 	printf("Matrix A --------------------\n");
