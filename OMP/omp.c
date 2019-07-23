@@ -40,6 +40,11 @@ int main(int argc, char const *argv[])
 			}
 		}
 	}
+
+  free(a);
+	free(b);
+	free(c);
+
   if (argv[2]!=NULL){
 	printf("Matrix A --------------------\n");
   for (int y = 0; y < N; y++) {
