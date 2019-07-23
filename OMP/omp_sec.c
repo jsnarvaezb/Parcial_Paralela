@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "omp.h"
 #include <time.h>
 #include <stdlib.h>
 
