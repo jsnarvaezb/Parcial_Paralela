@@ -8,6 +8,9 @@ int main(int argc, char *argv[])
   int me,p;
   int i,j,k;
   int a[N][N],b[N][N],c[N][N];
+	MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
+	MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
+
 	if (taskid == 0) {
     for (i=0; i<N; i++) {
       for (j=0; j<N; j++) {

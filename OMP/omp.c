@@ -1,74 +1,93 @@
 #include <stdio.h>
-#include <omp.h>
-#include <time.h>
-#include <stdlib.h>
+#include "mpi.h"
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
-	int i, j;
 	int N = atoi(argv[1]);
+  MPI_Status status;
+  int me,p;
+  int i,j,k;
+  int a[N][N],b[N][N],c[N][N];
+	MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
+	MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
 
-	float *a = (float*) malloc(sizeof(float)*N*N);
-  float *b = (float*) malloc(sizeof(float)*N*N);
-  float *c = (float*) malloc(sizeof(float)*N*N);
+	if (taskid == 0) {
+    for (i=0; i<N; i++) {
+      for (j=0; j<N; j++) {
+        a[i][j]= (rand()%10);
+        b[i][j]= (rand()%10);
+      }
+    }
 
+  /* Start up MPI */
 
-	for(i = 0; i < N; i++)
-	{
-		for(j = 0; j < N; j++)
-		{
-			a[i * N + j]= (rand()%10);
-			b[i * N + j]= (rand()%10);
-		}
-	}
-  omp_set_num_threads(1000);
-	/* realizar la multiplicación en paralelo */
-  #pragma omp parallel
-{
-		int i=0;
-		int j=0;
-		int k=0;
-		int suma = 0;
+  MPI_Init(&argc, &argv);
+  MPI_Comm_rank(MPI_COMM_WORLD, &me);
+  MPI_Comm_size(MPI_COMM_WORLD, &p);
 
-		#pragma omp for
-		for(i = 0; i < N; i++)
-		{
-			for(j = 0; j < N; j++)
-			{
-				c[i * N + j] = 0;
-				for(k = 0; k < N; k++)
-				{
-					c[i * N + j] += a[i * N + k] * b[k * N + j];
-				}
-			}
-		}
-}
+  printf("me=%d, p=%d", me, p);
 
-
-  if (argv[2]!=NULL){
-	printf("Matrix A --------------------\n");
-  for (int y = 0; y < N; y++) {
-   for (int x = 0; x < N; x++) {
-
-    printf("%f ", a[y * N + x]);
-   }
-   printf("\n");
+  /* Data distribution */
+  if (me == 0) // master
+  {
+      // assume p = 2
+      for (i=1; i<p; i++)
+      {
+          printf("send to  %d with data from: %d and size:%d \n", i, (i)*N/p, N*N/p);
+          MPI_Send(&a[i * N / p][0], N * N / p, MPI_INT, i, 0, MPI_COMM_WORLD);
+          MPI_Send(b, N * N, MPI_INT, i, 0, MPI_COMM_WORLD);
+      }
   }
-  printf("Matrix B --------------------\n");
-  for (int y = 0; y < N; y++) {
-   for (int x = 0; x < N; x++) {
-    printf("%f ", b[y * N + x]);
-   }
-   printf("\n");
-  }
-  printf("Matrix C --------------------\n");
+  else
+  {
+      printf("Recv from %d with data from: %d and size:%d \n", 0, (me)*N/p, N*N/p);
+      MPI_Recv(&a[me * N / p][0], N * N / p, MPI_INT, i, 0, MPI_COMM_WORLD, 0);
+      MPI_Recv(b, N * N, MPI_INT, i, 0, MPI_COMM_WORLD, 0);
 
- for (int y = 0; y < N; y++) {
-  for (int x = 0; x < N; x++) {
-   printf("%f ", c[y * N + x]);
   }
-  printf("\n");
- }
-}
-	return 0;
+  /* Computation */
+  for(i=me * N / p; i<(me+1) * N/p; ++i)
+  {
+      for (j=0; j < N; j++)
+      {
+          c[i][j] = 0;
+          for (k=0; k<N; k++)
+          {
+              c[i][j] += a[i][k] * b[k][j];
+          }
+      }
+  }
+
+  /* Result gathering */
+  if (me != 0 )
+  {
+      MPI_Send(&c[(me) * N/p][0], N*N/p, MPI_INT, 0, 0, MPI_COMM_WORLD);
+  }
+  else
+  {
+      for (i=1; i<p; i++)
+      {
+          MPI_Recv(&c[i * N/p][0], N * N / p, MPI_INT, i, 0, MPI_COMM_WORLD, 0);
+      }
+  }
+
+  MPI_Barrier(MPI_COMM_WORLD);
+
+
+  /* print the matrix */
+  if (me == 0)
+  {
+      for (i=0; i<N; i++) {
+          printf("\n\t| ");
+          for (j=0; j<N; j++)
+              printf("%2d ", c[i][j]);
+          printf("|");
+      }
+  }
+
+
+  /* Quit */
+
+  MPI_Finalize();
+  return 0;
 }
