@@ -8,7 +8,10 @@ main(int argc, char **argv)
   int numtasks,taskid,numworkers,source,dest,col,offset,i,j,k;
   int N = atoi(argv[1]);
   struct timeval start, stop;
-  double a[N][N],b[N][N],c[N][N];
+  float *a = (float*) malloc(sizeof(float)*N*N);
+  float *b = (float*) malloc(sizeof(float)*N*N);
+  float *c = (float*) malloc(sizeof(float)*N*N);
+
   MPI_Init(&argc, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
   MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
