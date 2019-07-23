@@ -7,6 +7,7 @@ int main(int argc, char const *argv[])
 {
 	int i, j;
 	int N = atoi(argv[1]);
+	int T = atoi(argv[2]);
 
 	float *a = (float*) malloc(sizeof(float)*N*N);
   float *b = (float*) malloc(sizeof(float)*N*N);
@@ -23,7 +24,7 @@ int main(int argc, char const *argv[])
 	}
   omp_set_num_threads(1000);
 	/* realizar la multiplicación en paralelo */
-  #pragma omp parallel
+  #pragma omp parallel num_threads(T)
 {
 		int i=0;
 		int j=0;
