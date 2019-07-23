@@ -1,0 +1,925 @@
+Multiplicación de matrices en OMP
+Ejecucion con 1 hosts con un N= 8,.
+--------------------------------------------------------------------------
+[[47618,1],0]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-45-169
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 1 processors
+[ip-172-31-45-169:10231] *** Process received signal ***
+[ip-172-31-45-169:10231] Signal: Floating point exception (8)
+[ip-172-31-45-169:10231] Signal code: Integer divide-by-zero (1)
+[ip-172-31-45-169:10231] Failing at address: 0x555cd8b3ece2
+[ip-172-31-45-169:10231] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3ef20)[0x7fe23f24ff20]
+[ip-172-31-45-169:10231] [ 1] ./mpi(+0xbce2)[0x555cd8b3ece2]
+[ip-172-31-45-169:10231] [ 2] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7fe23f232b97]
+[ip-172-31-45-169:10231] [ 3] ./mpi(+0xb5ca)[0x555cd8b3e5ca]
+[ip-172-31-45-169:10231] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node ip-172-31-45-169 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+real	0m3.253s
+user	0m0.027s
+sys	0m0.042s
+Ejecucion con 1 hosts con un N= 16,.
+--------------------------------------------------------------------------
+[[47633,1],0]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-45-169
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 1 processors
+[ip-172-31-45-169:10244] *** Process received signal ***
+[ip-172-31-45-169:10244] Signal: Floating point exception (8)
+[ip-172-31-45-169:10244] Signal code: Integer divide-by-zero (1)
+[ip-172-31-45-169:10244] Failing at address: 0x56372a1b3ce2
+[ip-172-31-45-169:10244] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3ef20)[0x7fa129a88f20]
+[ip-172-31-45-169:10244] [ 1] ./mpi(+0xbce2)[0x56372a1b3ce2]
+[ip-172-31-45-169:10244] [ 2] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7fa129a6bb97]
+[ip-172-31-45-169:10244] [ 3] ./mpi(+0xb5ca)[0x56372a1b35ca]
+[ip-172-31-45-169:10244] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node ip-172-31-45-169 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+real	0m3.254s
+user	0m0.043s
+sys	0m0.026s
+Ejecucion con 1 hosts con un N= 32,.
+--------------------------------------------------------------------------
+[[46564,1],0]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-45-169
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 1 processors
+[ip-172-31-45-169:10257] *** Process received signal ***
+[ip-172-31-45-169:10257] Signal: Floating point exception (8)
+[ip-172-31-45-169:10257] Signal code: Integer divide-by-zero (1)
+[ip-172-31-45-169:10257] Failing at address: 0x55ff73b10ce2
+[ip-172-31-45-169:10257] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3ef20)[0x7fbe3aea2f20]
+[ip-172-31-45-169:10257] [ 1] ./mpi(+0xbce2)[0x55ff73b10ce2]
+[ip-172-31-45-169:10257] [ 2] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7fbe3ae85b97]
+[ip-172-31-45-169:10257] [ 3] ./mpi(+0xb5ca)[0x55ff73b105ca]
+[ip-172-31-45-169:10257] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node ip-172-31-45-169 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+real	0m3.260s
+user	0m0.042s
+sys	0m0.026s
+Ejecucion con 1 hosts con un N= 64,.
+--------------------------------------------------------------------------
+[[46587,1],0]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-45-169
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 1 processors
+[ip-172-31-45-169:10270] *** Process received signal ***
+[ip-172-31-45-169:10270] Signal: Floating point exception (8)
+[ip-172-31-45-169:10270] Signal code: Integer divide-by-zero (1)
+[ip-172-31-45-169:10270] Failing at address: 0x55bdd915bce2
+[ip-172-31-45-169:10270] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3ef20)[0x7f912af57f20]
+[ip-172-31-45-169:10270] [ 1] ./mpi(+0xbce2)[0x55bdd915bce2]
+[ip-172-31-45-169:10270] [ 2] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7f912af3ab97]
+[ip-172-31-45-169:10270] [ 3] ./mpi(+0xb5ca)[0x55bdd915b5ca]
+[ip-172-31-45-169:10270] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node ip-172-31-45-169 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+real	0m3.251s
+user	0m0.037s
+sys	0m0.031s
+Ejecucion con 1 hosts con un N= 128,.
+--------------------------------------------------------------------------
+[[46542,1],0]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-45-169
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 1 processors
+[ip-172-31-45-169:10283] *** Process received signal ***
+[ip-172-31-45-169:10283] Signal: Floating point exception (8)
+[ip-172-31-45-169:10283] Signal code: Integer divide-by-zero (1)
+[ip-172-31-45-169:10283] Failing at address: 0x5557f96c5ce2
+[ip-172-31-45-169:10283] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3ef20)[0x7f720548ff20]
+[ip-172-31-45-169:10283] [ 1] ./mpi(+0xbce2)[0x5557f96c5ce2]
+[ip-172-31-45-169:10283] [ 2] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7f7205472b97]
+[ip-172-31-45-169:10283] [ 3] ./mpi(+0xb5ca)[0x5557f96c55ca]
+[ip-172-31-45-169:10283] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node ip-172-31-45-169 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+real	0m3.241s
+user	0m0.035s
+sys	0m0.032s
+Ejecucion con 1 hosts con un N= 256,.
+--------------------------------------------------------------------------
+[[46557,1],0]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-45-169
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 1 processors
+[ip-172-31-45-169:10296] *** Process received signal ***
+[ip-172-31-45-169:10296] Signal: Floating point exception (8)
+[ip-172-31-45-169:10296] Signal code: Integer divide-by-zero (1)
+[ip-172-31-45-169:10296] Failing at address: 0x55ad93343ce2
+[ip-172-31-45-169:10296] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3ef20)[0x7f73dea1ff20]
+[ip-172-31-45-169:10296] [ 1] ./mpi(+0xbce2)[0x55ad93343ce2]
+[ip-172-31-45-169:10296] [ 2] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7f73dea02b97]
+[ip-172-31-45-169:10296] [ 3] ./mpi(+0xb5ca)[0x55ad933435ca]
+[ip-172-31-45-169:10296] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node ip-172-31-45-169 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+real	0m3.265s
+user	0m0.033s
+sys	0m0.038s
+Ejecucion con 1 hosts con un N= 512,.
+--------------------------------------------------------------------------
+[[46544,1],0]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-45-169
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 1 processors
+[ip-172-31-45-169:10309] *** Process received signal ***
+[ip-172-31-45-169:10309] Signal: Floating point exception (8)
+[ip-172-31-45-169:10309] Signal code: Integer divide-by-zero (1)
+[ip-172-31-45-169:10309] Failing at address: 0x55f4337a7ce2
+[ip-172-31-45-169:10309] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3ef20)[0x7f383ecc1f20]
+[ip-172-31-45-169:10309] [ 1] ./mpi(+0xbce2)[0x55f4337a7ce2]
+[ip-172-31-45-169:10309] [ 2] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7f383eca4b97]
+[ip-172-31-45-169:10309] [ 3] ./mpi(+0xb5ca)[0x55f4337a75ca]
+[ip-172-31-45-169:10309] *** End of error message ***
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node ip-172-31-45-169 exited on signal 8 (Floating point exception).
+--------------------------------------------------------------------------
+
+real	0m3.280s
+user	0m0.054s
+sys	0m0.026s
+Ejecucion con 1 hosts con un N= 1024.
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 0 on node ip-172-31-45-169 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+real	0m3.114s
+user	0m0.021s
+sys	0m0.028s
+Ejecucion con , hosts con un N= 8,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 16,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 32,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 64,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 128,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.000s
+sys	0m0.001s
+Ejecucion con , hosts con un N= 256,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 512,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 1024.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.000s
+sys	0m0.001s
+Ejecucion con 2 hosts con un N= 8,.
+--------------------------------------------------------------------------
+[[46472,1],0]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-45-169
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 2 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 2 processors
+[ip-172-31-45-169:10341] 1 more process has sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10341] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m0.989s
+user	0m0.046s
+sys	0m0.027s
+Ejecucion con 2 hosts con un N= 16,.
+--------------------------------------------------------------------------
+[[46492,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 2 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 2 processors
+[ip-172-31-45-169:10353] 1 more process has sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10353] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m0.998s
+user	0m0.033s
+sys	0m0.039s
+Ejecucion con 2 hosts con un N= 32,.
+--------------------------------------------------------------------------
+[[46480,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 2 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 2 processors
+[ip-172-31-45-169:10365] 1 more process has sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10365] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m0.993s
+user	0m0.052s
+sys	0m0.020s
+Ejecucion con 2 hosts con un N= 64,.
+--------------------------------------------------------------------------
+[[46436,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 2 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 2 processors
+[ip-172-31-45-169:10377] 1 more process has sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10377] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m0.997s
+user	0m0.037s
+sys	0m0.037s
+Ejecucion con 2 hosts con un N= 128,.
+--------------------------------------------------------------------------
+[[46456,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 2 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 2 processors
+[ip-172-31-45-169:10389] 1 more process has sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10389] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m1.004s
+user	0m0.055s
+sys	0m0.024s
+Ejecucion con 2 hosts con un N= 256,.
+--------------------------------------------------------------------------
+[[46412,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 2 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 2 processors
+[ip-172-31-45-169:10401] 1 more process has sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10401] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m1.158s
+user	0m0.087s
+sys	0m0.060s
+Ejecucion con 2 hosts con un N= 512,.
+--------------------------------------------------------------------------
+[[46400,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 2 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 2 processors
+[ip-172-31-45-169:10413] 1 more process has sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10413] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m2.306s
+user	0m0.355s
+sys	0m0.341s
+Ejecucion con 2 hosts con un N= 1024.
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 19962 on node 172.31.47.17 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+
+real	0m4.105s
+user	0m0.042s
+sys	0m0.030s
+Ejecucion con , hosts con un N= 8,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 16,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 32,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 64,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 128,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 256,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 512,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con , hosts con un N= 1024.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  ,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con 3, hosts con un N= 8,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  3,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.000s
+sys	0m0.001s
+Ejecucion con 3, hosts con un N= 16,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  3,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con 3, hosts con un N= 32,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  3,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.001s
+sys	0m0.000s
+Ejecucion con 3, hosts con un N= 64,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  3,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.000s
+sys	0m0.002s
+Ejecucion con 3, hosts con un N= 128,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  3,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con 3, hosts con un N= 256,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  3,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.001s
+sys	0m0.000s
+Ejecucion con 3, hosts con un N= 512,.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  3,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.000s
+Ejecucion con 3, hosts con un N= 1024.
+----------------------------------------------------------------------------
+Open MPI has detected that a parameter given to a command line
+option does not match the expected format:
+
+  Option: np
+  Param:  3,
+
+This is frequently caused by omitting to provide the parameter
+to an option that requires one. Please check the command line and try again.
+----------------------------------------------------------------------------
+
+real	0m0.006s
+user	0m0.000s
+sys	0m0.001s
+Ejecucion con 4 hosts con un N= 8,.
+--------------------------------------------------------------------------
+[[46345,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 4 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 4 processors
+Hello from processor ip-172-31-40-74, rank 3 out of 4 processors
+Hello from processor ip-172-31-37-29, rank 2 out of 4 processors
+[ip-172-31-45-169:10468] 3 more processes have sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10468] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m1.022s
+user	0m0.044s
+sys	0m0.041s
+Ejecucion con 4 hosts con un N= 16,.
+--------------------------------------------------------------------------
+[[46365,1],2]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-37-29
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 4 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 4 processors
+Hello from processor ip-172-31-40-74, rank 3 out of 4 processors
+Hello from processor ip-172-31-37-29, rank 2 out of 4 processors
+[ip-172-31-45-169:10480] 3 more processes have sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10480] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m1.016s
+user	0m0.052s
+sys	0m0.032s
+Ejecucion con 4 hosts con un N= 32,.
+--------------------------------------------------------------------------
+[[46353,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 4 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 4 processors
+Hello from processor ip-172-31-40-74, rank 3 out of 4 processors
+Hello from processor ip-172-31-37-29, rank 2 out of 4 processors
+[ip-172-31-45-169:10492] 3 more processes have sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10492] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m1.022s
+user	0m0.037s
+sys	0m0.046s
+Ejecucion con 4 hosts con un N= 64,.
+--------------------------------------------------------------------------
+[[46309,1],2]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-37-29
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 4 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 4 processors
+Hello from processor ip-172-31-40-74, rank 3 out of 4 processors
+Hello from processor ip-172-31-37-29, rank 2 out of 4 processors
+[ip-172-31-45-169:10504] 3 more processes have sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10504] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m1.030s
+user	0m0.042s
+sys	0m0.043s
+Ejecucion con 4 hosts con un N= 128,.
+--------------------------------------------------------------------------
+[[46329,1],2]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-37-29
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 4 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 4 processors
+Hello from processor ip-172-31-40-74, rank 3 out of 4 processors
+Hello from processor ip-172-31-37-29, rank 2 out of 4 processors
+[ip-172-31-45-169:10516] 3 more processes have sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10516] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m1.021s
+user	0m0.047s
+sys	0m0.039s
+Ejecucion con 4 hosts con un N= 256,.
+--------------------------------------------------------------------------
+[[46285,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 4 processors
+Hello from processor ip-172-31-37-29, rank 2 out of 4 processors
+Hello from processor ip-172-31-40-74, rank 3 out of 4 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 4 processors
+[ip-172-31-45-169:10528] 3 more processes have sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10528] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m1.079s
+user	0m0.067s
+sys	0m0.044s
+Ejecucion con 4 hosts con un N= 512,.
+--------------------------------------------------------------------------
+[[46273,1],1]: A high-performance Open MPI point-to-point messaging module
+was unable to find any relevant network interfaces:
+
+Module: OpenFabrics (openib)
+  Host: ip-172-31-47-17
+
+Another transport will be used instead, although this may result in
+lower performance.
+
+NOTE: You can disable this warning by setting the MCA parameter
+btl_base_warn_component_unused to 0.
+--------------------------------------------------------------------------
+Hello from processor ip-172-31-45-169, rank 0 out of 4 processors
+Hello from processor ip-172-31-47-17, rank 1 out of 4 processors
+Hello from processor ip-172-31-37-29, rank 2 out of 4 processors
+Hello from processor ip-172-31-40-74, rank 3 out of 4 processors
+[ip-172-31-45-169:10540] 3 more processes have sent help message help-mpi-btl-base.txt / btl:no-nics
+[ip-172-31-45-169:10540] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+
+real	0m1.509s
+user	0m0.158s
+sys	0m0.160s
+Ejecucion con 4 hosts con un N= 1024.
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 20761 on node 172.31.47.17 exited on signal 11 (Segmentation fault).
+--------------------------------------------------------------------------
+3 total processes killed (some possibly by mpirun during cleanup)
+
+real	0m4.119s
+user	0m0.021s
+sys	0m0.029s
