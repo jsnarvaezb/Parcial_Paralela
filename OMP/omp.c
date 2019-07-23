@@ -8,13 +8,10 @@ int main(int argc, char const *argv[])
 	int i, j;
 	int N = atoi(argv[1]);
 
-	//float *a = (float*) malloc(sizeof(float)*N*N);
-  //float *b = (float*) malloc(sizeof(float)*N*N);
-  //float *c = (float*) malloc(sizeof(float)*N*N);
+	float *a = (float*) malloc(sizeof(float)*N*N);
+  float *b = (float*) malloc(sizeof(float)*N*N);
+  float *c = (float*) malloc(sizeof(float)*N*N);
 
-  float a[N*N];
-	float b[N*N];
-  float c[N*N];
 
 	for(i = 0; i < N; i++)
 	{
