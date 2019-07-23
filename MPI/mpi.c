@@ -1,102 +1,171 @@
 #include <stdio.h>
-#include "mpi.h"
-#define N               4
+#include <stdlib.h>
+#include <mpi.h>
+
+#define SIZE 4
+#define FROM_MASTER 1
+#define FROM_WORKER 2
+#define DEBUG 1
 
 MPI_Status status;
 
-double a[N][N],b[N][N],c[N][N];
+static double a[SIZE][SIZE];
+static double b[SIZE][SIZE];
+static double c[SIZE][SIZE];
 
-main(int argc, char **argv)
+static void init_matrix(void)
 {
-  int numtasks,taskid,numworkers,source,dest,rows,offset,i,j,k;
-
-  struct timeval start, stop;
-
-  MPI_Init(&argc, &argv);
-  MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
-  MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
-
-  numworkers = numtasks-1;
-  char processor_name[MPI_MAX_PROCESSOR_NAME];
-  int name_len;
-  MPI_Get_processor_name(processor_name, &name_len);
-  printf("Hello from processor %s, rank %d out of %d processors\n",
-        processor_name, taskid, numtasks);
-
-  /*---------------------------- master ----------------------------*/
-  if (taskid == 0) {
-    for (i=0; i<N; i++) {
-      for (j=0; j<N; j++) {
-        a[i][j]= (rand()%10);
-        b[i][j]= (rand()%10);
-      }
-    }
-
-    /* send matrix data to the worker tasks */
-    rows = N/numworkers;
-    offset = 0;
-
-    for (dest=1; dest<=numworkers; dest++)
+    int i, j;
+    for (i = 0; i < SIZE; i++)
     {
-      MPI_Send(&offset, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
-      MPI_Send(&rows, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
-      MPI_Send(&a[offset][0], rows*N, MPI_DOUBLE,dest,1, MPI_COMM_WORLD);
-      MPI_Send(&b, N*N, MPI_DOUBLE, dest, 1, MPI_COMM_WORLD);
-      offset = offset + rows;
-    }
+        for (j = 0; j < SIZE; j++) {
+              a[i][j] = 1;
+              b[i][j] = 1;
 
-    /* wait for results from all worker tasks */
-    for (i=1; i<=numworkers; i++)
-    {
-      source = i;
-      MPI_Recv(&offset, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
-      MPI_Recv(&rows, 1, MPI_INT, source, 2, MPI_COMM_WORLD, &status);
-      MPI_Recv(&c[offset][0], rows*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
-    }
+       } //end for i
+    }  //end for j
+} //end init_matrix()
+
+static void print_matrix(void)
+{
+int i, j;
+for(i = 0; i < SIZE; i++) {
+    for(j = 0; j < SIZE; j++) {
+        printf("%7.2f", c[i][j]);
+    } //end for i
+printf("\n");
+   }    //end for j
+  }        //end print_matrix
+
+int main(int argc, char **argv)
+{
+int myrank, nproc;
+int rows;
+int mtype;
+int dest, src, offseta, offsetb;
+double start_time, end_time;
+int i, j, k, l;
+
+MPI_Init(&argc, &argv);
+MPI_Comm_size(MPI_COMM_WORLD, &nproc);
+MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
+
+rows = SIZE/nproc;  //compute the block size
+mtype = FROM_MASTER; //  =1
+
+   if (myrank == 0) {
+    /*Initialization*/
+    printf("SIZE = %d, number of nodes = %d\n", SIZE, nproc);
+    init_matrix();
 
 
-  }
 
-  /*---------------------------- worker----------------------------*/
-  if (taskid > 0) {
-    source = 0;
-    MPI_Recv(&offset, 1, MPI_INT, source, 1, MPI_COMM_WORLD, &status);
-    MPI_Recv(&rows, 1, MPI_INT, source, 1, MPI_COMM_WORLD, &status);
-    MPI_Recv(&a, rows*N, MPI_DOUBLE, source, 1, MPI_COMM_WORLD, &status);
-    MPI_Recv(&b, N*N, MPI_DOUBLE, source, 1, MPI_COMM_WORLD, &status);
+    if(nproc == 1) {
+        for(i = 0; i < SIZE; i++) {
+            for(j = 0; j < SIZE; j++) {
+                for(k = 0; k < SIZE; k++)
+                    c[i][j] = c[i][j] + a[i][k]*b[j][k];
+            } //end for i
+        }  //end for j
+        print_matrix();//---------------------------------
+        printf("Execution time on %2d nodes: %f\n", nproc, end_time-
+                    start_time);
+    } // end  if(nproc == 1)
 
-    /* Matrix multiplication */
-    for (k=0; k<N; k++)
-      for (i=0; i<rows; i++) {
-        c[i][k] = 0.0;
-        for (j=0; j<N; j++)
-          c[i][k] = c[i][k] + a[i][j] * b[j][k];
-      }
-      printf("Here is the matrix A:\n");
-      for (i=0; i<N; i++) {
-        for (j=0; j<N; j++)
-          printf("%6.2f   ", a[i][j]);
-        printf ("\n");
-      }
+    else {
 
-      printf("Here is the matrix B:\n");
-      for (i=0; i<N; i++) {
-        for (j=0; j<N; j++)
-          printf("%6.2f   ", b[i][j]);
-        printf ("\n");
-      }
+          for(l = 0; l < nproc; l++){
+            offsetb = rows*l;  //start from (block size * processor id)
+            offseta = rows;
+            mtype = FROM_MASTER; // tag =1
 
-       printf("Here is the result matrix:\n");
-       for (i=0; i<N; i++) {
-         for (j=0; j<N; j++)
-           printf("%6.2f   ", c[i][j]);
-         printf ("\n");
-       }
+              for(dest = 1; dest < nproc; dest++){
+                MPI_Send(&offseta, 1, MPI_INT, dest, mtype,
+                            MPI_COMM_WORLD);
+                MPI_Send(&offsetb, 1, MPI_INT, dest, mtype,
+                            MPI_COMM_WORLD);
+                MPI_Send(&rows, 1, MPI_INT, dest, mtype, MPI_COMM_WORLD);
+                MPI_Send(&a[offseta][0], rows*SIZE, MPI_DOUBLE, dest,
+                             mtype, MPI_COMM_WORLD);
+                MPI_Send(&b[0][offsetb], rows*SIZE, MPI_DOUBLE, dest,
+                          mtype, MPI_COMM_WORLD);
 
-    MPI_Send(&offset, 1, MPI_INT, 0, 2, MPI_COMM_WORLD);
-    MPI_Send(&rows, 1, MPI_INT, 0, 2, MPI_COMM_WORLD);
-    MPI_Send(&c, rows*N, MPI_DOUBLE, 0, 2, MPI_COMM_WORLD);
-  }
+                offseta += rows;
+                offsetb = (offsetb+rows)%SIZE;
 
-  MPI_Finalize();
-}
+            } // end for dest
+
+            offseta = rows;
+            offsetb = rows*l;
+
+     //--mult the final local and print final global mult
+            for(i = 0; i < offseta; i++) {
+                for(j = offsetb; j < offsetb+rows; j++) {
+                        for(k = 0; k < SIZE; k++){
+                            c[i][j] = c[i][j] + a[i][k]*b[k][j];
+                    }//end for k
+                } //end for j
+            }// end for i
+               /*- wait for results from all worker tasks */
+            mtype = FROM_WORKER;
+            for(src = 1; src < nproc; src++){
+                MPI_Recv(&offseta, 1, MPI_INT, src, mtype, MPI_COMM_WORLD,
+                           &status);
+                MPI_Recv(&offsetb, 1, MPI_INT, src, mtype, MPI_COMM_WORLD,
+                            &status);
+                MPI_Recv(&rows, 1, MPI_INT, src, mtype, MPI_COMM_WORLD,
+                           &status);
+                for(i = 0; i < rows; i++) {
+                    MPI_Recv(&c[offseta+i][offsetb], offseta, MPI_DOUBLE,
+           src, mtype, MPI_COMM_WORLD, &status);
+                } //end for scr
+            }//end for i
+        } //end for l
+        end_time = MPI_Wtime();
+        print_matrix();
+       }//end else
+   } //end if (myrank == 0)
+
+   else{
+          /*---------------------------- worker----------------------*/
+      if(nproc > 1) {
+            for(l = 0; l < nproc; l++){
+               mtype = FROM_MASTER;
+               MPI_Recv(&offseta, 1, MPI_INT, 0, mtype, MPI_COMM_WORLD,
+                       &status);
+               MPI_Recv(&offsetb, 1, MPI_INT, 0, mtype, MPI_COMM_WORLD,
+                       &status);
+            MPI_Recv(&rows, 1, MPI_INT, 0, mtype, MPI_COMM_WORLD,
+                      &status);
+
+            MPI_Recv(&a[offseta][0], rows*SIZE, MPI_DOUBLE, 0, mtype,
+            MPI_COMM_WORLD, &status);
+            MPI_Recv(&b[0][offsetb], rows*SIZE, MPI_DOUBLE, 0, mtype,
+            MPI_COMM_WORLD, &status);
+
+            for(i = offseta; i < offseta+rows; i++) {
+                for(j = offsetb; j < offsetb+rows; j++) {
+                    for(k = 0; k < SIZE; k++){
+                        c[i][j] = c[i][j] + a[i][k]*b[k][j];
+                    } //end for j
+                } //end for i
+
+            } //end for l
+
+            mtype = FROM_WORKER;
+            MPI_Send(&offseta, 1, MPI_INT, 0, mtype, MPI_COMM_WORLD);
+            MPI_Send(&offsetb, 1, MPI_INT, 0, mtype, MPI_COMM_WORLD);
+            MPI_Send(&rows, 1, MPI_INT, 0, mtype, MPI_COMM_WORLD);
+                for(i = 0; i < rows; i++){
+                MPI_Send(&c[offseta+i][offsetb], offseta, MPI_DOUBLE,   0,
+                 mtype, MPI_COMM_WORLD);
+
+               } //end for i
+            }//end for l
+
+        } //end if (nproc > 1)
+    } // end else
+
+    MPI_Finalize();
+    return 0;
+} //end main()
