@@ -118,7 +118,7 @@ for (int i = 0; i<N; i++) {
   printf ("\n");
 }
 printf ("\n");
-
+}
 
 
     printf("\nResult Matrix C = Matrix A * Matrix B:\n\n");
