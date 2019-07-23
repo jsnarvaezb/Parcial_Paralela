@@ -31,7 +31,7 @@ main(int argc, char **argv)
     rows = N/numworkers;
     offset = 0;
 
-    for (dest=1; dest<=numworkers; dest++)
+    for (dest=1; dest<numworkers; dest++)
     {
       MPI_Send(&offset, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
       MPI_Send(&rows, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
@@ -69,10 +69,6 @@ main(int argc, char **argv)
         printf("%6.2f   ", c[i][j]);
       printf ("\n");
     }
-
-    fprintf(stdout,"Time = %.6f\n\n",
-         (stop.tv_sec+stop.tv_usec*1e-6)-(start.tv_sec+start.tv_usec*1e-6));
-
   }
 
   /*---------------------------- worker----------------------------*/
