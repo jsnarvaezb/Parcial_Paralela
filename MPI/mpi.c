@@ -102,14 +102,14 @@ int main(int argc, char **argv)
     }
 
 // Print the result matrix
-printf("Matrix A\n\n");
+printf("Matrix A");
 for (int i = 0; i<N; i++) {
   for (int j = 0; j<N; j++)
     printf("%.0f\t", matrix_a[i][j]);
   printf ("\n");
 }
 printf ("\n");
-}
+
 
 printf("Matrix B\n\n");
 for (int i = 0; i<N; i++) {
@@ -118,7 +118,7 @@ for (int i = 0; i<N; i++) {
   printf ("\n");
 }
 printf ("\n");
-}
+
 
 
     printf("\nResult Matrix C = Matrix A * Matrix B:\n\n");
