@@ -31,7 +31,7 @@ main(int argc, char **argv)
     rows = N/numworkers;
     offset = 0;
 
-    for (dest=1; dest<numworkers; dest++)
+    for (dest=1; dest<=numworkers; dest++)
     {
       MPI_Send(&offset, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
       MPI_Send(&rows, 1, MPI_INT, dest, 1, MPI_COMM_WORLD);
