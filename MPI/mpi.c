@@ -54,26 +54,26 @@ main(int argc, char **argv)
       MPI_Recv(&c[offset][0], rows*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
     }
 
-   printf("Here is the matrix A:\n");
+   /*printf("Matriz A:\n");
    for (i=0; i<N; i++) {
      for (j=0; j<N; j++)
        printf("%6.2f   ", a[i][j]);
      printf ("\n");
    }
 
-   printf("Here is the matrix B:\n");
+   printf("Matriz B:\n");
    for (i=0; i<N; i++) {
      for (j=0; j<N; j++)
        printf("%6.2f   ", b[i][j]);
      printf ("\n");
    }
 
-    printf("Here is the result matrix:\n");
+    printf("Resultado:\n");
     for (i=0; i<N; i++) {
       for (j=0; j<N; j++)
         printf("%6.2f   ", c[i][j]);
       printf ("\n");
-    }
+    }*/
   }
 
   /*---------------------------- worker----------------------------*/
