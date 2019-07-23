@@ -24,7 +24,10 @@ int main(int argc, char const *argv[])
 	/* realizar la multiplicación en paralelo */
   #pragma omp parallel
 {
-		int i= j= k =suma = 0;
+		int i=0;
+		int j=0;
+		int k=0;
+		int suma = 0;
 
 		#pragma omp parallel for
 		for(i = 0; i < N; i++)
