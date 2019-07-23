@@ -23,7 +23,7 @@ int main(int argc, char const *argv[])
   omp_set_num_threads(1000);
 	/* realizar la multiplicación en paralelo */
   #pragma omp parallel
-
+{
 		int i= j= k =suma = 0;
 
 		#pragma omp parallel for
@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
 				}
 			}
 		}
-
+}
 
   free(a);
 	free(b);
