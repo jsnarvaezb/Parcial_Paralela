@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include "mpi.h"
 
-
 MPI_Status status;
-
-
 
 main(int argc, char **argv)
 {
@@ -23,7 +20,6 @@ main(int argc, char **argv)
   printf("Hello from processor %s, rank %d out of %d processors\n",
         processor_name, taskid, numtasks);
 
-  /*---------------------------- master ----------------------------*/
   if (taskid == 0) {
     for (i=0; i<N; i++) {
       for (j=0; j<N; j++) {
@@ -32,7 +28,6 @@ main(int argc, char **argv)
       }
     }
 
-    /* send matrix data to the worker tasks */
     rows = N/numworkers;
     offset = 0;
 
@@ -45,7 +40,6 @@ main(int argc, char **argv)
       offset = offset + rows;
     }
 
-    /* wait for results from all worker tasks */
     for (i=1; i<=numworkers; i++)
     {
       source = i;
@@ -57,26 +51,25 @@ main(int argc, char **argv)
    /*printf("Matriz A:\n");
    for (i=0; i<N; i++) {
      for (j=0; j<N; j++)
-       printf("%6.2f   ", a[i][j]);
+       printf("%3.2f   ", a[i][j]);
      printf ("\n");
    }
 
    printf("Matriz B:\n");
    for (i=0; i<N; i++) {
      for (j=0; j<N; j++)
-       printf("%6.2f   ", b[i][j]);
+       printf("%3.2f   ", b[i][j]);
      printf ("\n");
    }
 
     printf("Resultado:\n");
     for (i=0; i<N; i++) {
       for (j=0; j<N; j++)
-        printf("%6.2f   ", c[i][j]);
+        printf("%3.2f   ", c[i][j]);
       printf ("\n");
     }*/
   }
 
-  /*---------------------------- worker----------------------------*/
   if (taskid > 0) {
     source = 0;
     MPI_Recv(&offset, 1, MPI_INT, source, 1, MPI_COMM_WORLD, &status);
@@ -84,7 +77,6 @@ main(int argc, char **argv)
     MPI_Recv(&a, rows*N, MPI_DOUBLE, source, 1, MPI_COMM_WORLD, &status);
     MPI_Recv(&b, N*N, MPI_DOUBLE, source, 1, MPI_COMM_WORLD, &status);
 
-    /* Matrix multiplication */
     for (k=0; k<N; k++)
       for (i=0; i<rows; i++) {
         c[i][k] = 0.0;
