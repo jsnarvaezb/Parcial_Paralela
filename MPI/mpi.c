@@ -123,22 +123,22 @@ mtype = FROM_MASTER; //  =1
         } //end for l
         end_time = MPI_Wtime();
         printf("Here is the matrix A:\n");
-        for (i=0; i<N; i++) {
-          for (j=0; j<N; j++)
+        for (i=0; i<SIZE; i++) {
+          for (j=0; j<SIZE; j++)
             printf("%6.2f   ", a[i][j]);
           printf ("\n");
         }
 
         printf("Here is the matrix B:\n");
-        for (i=0; i<N; i++) {
-          for (j=0; j<N; j++)
+        for (i=0; i<SIZE; i++) {
+          for (j=0; j<SIZE; j++)
             printf("%6.2f   ", b[i][j]);
           printf ("\n");
         }
 
          printf("Here is the result matrix:\n");
-         for (i=0; i<N; i++) {
-           for (j=0; j<N; j++)
+         for (i=0; i<SIZE; i++) {
+           for (j=0; j<SIZE; j++)
              printf("%6.2f   ", c[i][j]);
            printf ("\n");
          }
