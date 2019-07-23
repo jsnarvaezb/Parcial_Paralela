@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include "mpi.h"
-#define N               4
+
 
 MPI_Status status;
 
-double a[N][N],b[N][N],c[N][N];
+
 
 main(int argc, char **argv)
 {
   int numtasks,taskid,numworkers,source,dest,rows,offset,i,j,k;
-
+  int N = atoi(argv[1]);
   struct timeval start, stop;
-
+  double a[N][N],b[N][N],c[N][N];
   MPI_Init(&argc, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
   MPI_Comm_size(MPI_COMM_WORLD, &numtasks);
