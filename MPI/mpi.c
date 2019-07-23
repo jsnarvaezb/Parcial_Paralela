@@ -49,7 +49,6 @@ main(int argc, char **argv)
       MPI_Recv(&c[offset][0], rows*N, MPI_DOUBLE, source, 2, MPI_COMM_WORLD, &status);
     }
 
-    gettimeofday(&stop, 0);
 
     printf("Here is the result matrix:\n");
     for (i=0; i<N; i++) {
